@@ -1,6 +1,6 @@
 # What does?
 
-It outputs the employee data according to the user requests.
+It outputs the employee data according to the user's requests.
 
 ## Libraries
 
