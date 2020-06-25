@@ -1,7 +1,7 @@
-###What does?
+# What does?
 
 It rewrites the paragraphs to sentences.
 
-###Remarks
+## Remarks
 
 You can check out the problem.txt file and see in details what the program solves.
