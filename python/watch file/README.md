@@ -4,6 +4,6 @@ It checks if History.xls file has changed and if it does, then create another ex
 
 ## Frameworks/Libraries
 
-• Threading
-• Pandas
+- Threading
+- Pandas
 
