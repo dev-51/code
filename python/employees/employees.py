@@ -20,13 +20,13 @@ import sys
 
 pp = pprint.PrettyPrinter(indent=5)
 
-content = requests.get('http://localhost:8080/actions/employees.json')
+content = requests.get('http://localhost:8080/employees/employees.json')
 employees = json.loads(content.text)
 
-content = requests.get('http://localhost:8080/actions/offices.json')
+content = requests.get('http://localhost:8080/employees/offices.json')
 offices = json.loads(content.text)
 
-content = requests.get('http://localhost:8080/actions/departments.json')
+content = requests.get('http://localhost:8080/employees/departments.json')
 departments = json.loads(content.text)
 
 query_string = os.environ.get("QUERY_STRING", "")
