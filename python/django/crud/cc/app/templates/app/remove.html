@@ -1,0 +1,57 @@
+{% if data.error %}
+<form method="POST" action="/app/">
+    {{ data.error }}
+<br><br>
+<input type="submit" name="back" value="Volver">
+</form>
+{% else %}
+    {% if data.account_type == "F" %}
+<form method="POST" action="/app/">
+<table border="1">
+<tr>
+    <td>CUIT</td>
+    <td>{{ data.person.account.cuit }}</td>
+</tr>
+<tr>
+    <td>Nombre</td>
+    <td>{{ data.person.name }}</td>
+</tr>
+<tr>
+    <td>Surname</td>
+    <td>{{ data.person.surname }}</td>
+</tr>
+<tr>
+    <td>DNI</td>
+    <td>{{ data.person.cardid }}</td>
+</tr>
+</table>
+<br>
+<input type="hidden" name="cuit" value="{{ data.person.account.cuit }}">
+<input type="hidden" name="account_type" value="{{ data.account_type }}">
+<input type="submit" name="remove" value="Borrar permanentemente">
+<input type="submit" name="cancel" value="Cancelar">
+</form>
+    {% elif data.account_type == "J" %}
+<form method="POST" action="/app/">
+<table border="1">
+<tr>
+    <td>CUIT</td>
+    <td>{{ data.company.account.cuit }}</td>
+</tr>
+<tr>
+    <td>Nombre</td>
+    <td>{{ data.company.name }}</td>
+</tr>
+<tr>
+    <td>Año</td>
+    <td>{{ data.company.year }}</td>
+</tr>
+</table>
+<br>
+<input type="hidden" name="cuit" value="{{ data.company.account.cuit }}">
+<input type="hidden" name="account_type" value="{{ data.account_type }}">
+<input type="submit" name="remove" value="Borrar permanentemente">
+<input type="submit" name="cancel" value="Cancelar">
+</form>
+    {% endif %}
+{% endif %}
