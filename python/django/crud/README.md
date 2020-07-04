@@ -1,11 +1,12 @@
 # What does?
 
-It is a web CRUD application where you can create, remove, update, and delete records. Plus a recordset list.
+It is a CRUD web application where you can manipulate records from a local database and also, list them.
 
 ## Frameworks/Libraries
 
 - Django
+- Rest Framework
 
 ## Remarks
 
-You can browse /app/create/dummy-database/ if you want to recreate the dummy database again.
+You can browse /app/restore/database/ or /app/api/?restore=do if you want to restore the database again.
