@@ -15,8 +15,32 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from app import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^app/', include('app.urls')),
+
+    # restore database
+    # /app/api/?restore=do
+
+    # insert person, company
+    # /app/api/?insert=do&cuit=30710647011&account_type=F&name=Roberto&surname=Ruiz&cardid=27066345
+    # /app/api/?insert=do&cuit=30117706184&account_type=J&name=Robotics&year=1994
+
+    # update person, company
+    # /app/api/?update=do&cuit=30710647011&account_type=F&name=Roberto&surname=Ruiz&cardid=27066345
+    # /app/api/?update=do&cuit=30117706184&account_type=J&name=Robotics&year=1994
+
+    # remove person, company
+    # /app/api/?remove=do&cuit=30710647011&account_type=F
+    # /app/api/?remove=do&cuit=30117706184&account_type=J
+
+    # view person, company
+    # /app/api/?view=do&cuit=30710647011&account_type=F
+    # /app/api/?view=do&cuit=30117706184&account_type=J
+
+    # view all
+    # /app/api/?list=do
+    url(r'^app/api/$', views.CRUD.as_view()),
 ]

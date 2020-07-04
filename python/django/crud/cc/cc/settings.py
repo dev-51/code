@@ -31,12 +31,13 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
        'rest_framework.permissions.AllowAny',
     ),
+    'UNICODE_JSON': True,
 }
 
 # Application definition
 
 INSTALLED_APPS = [
-	'app.apps.AppConfig',
+    'app.apps.AppConfig',
     'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',

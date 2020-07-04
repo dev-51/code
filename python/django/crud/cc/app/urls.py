@@ -32,8 +32,7 @@ urlpatterns = [
     # /app/view/
     url(r'view/(?P<cuit>[0-9]+)/(?P<account_type>[A-Z]{1})/$', views.view, name='view'),
 
-    # /app/create/dummy-database/
-    url(r'create/dummy-database/$', views.create, name='create'),
+    # /app/restore/database/
+    url(r'restore/database/$', views.restore, name='restore'),
 ]
-
 

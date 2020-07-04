@@ -1,7 +1,7 @@
 {% if all_accounts %}
     <h3>Listado de titulares de cuentas corrientes</h3>
-    {% if message_error %}
-        {{ message_error }}
+    {% if message %}
+        {{ message }}
         <br><br>
     {% endif %}
     <form method="post" action="/app/">

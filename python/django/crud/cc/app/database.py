@@ -29,7 +29,6 @@ class Database:
     def removePerson(self):
         account = Account.objects.get(cuit=self.cuit)
         account.delete()
-        #Person.objects.get(account=account).delete()
 
     def insertCompany(self, record):
         account = Account(cuit=self.cuit, account_type=self.account_type)
@@ -53,4 +52,3 @@ class Database:
     def removeCompany(self):
         account = Account.objects.get(cuit=self.cuit)
         account.delete()
-        #Company.objects.get(account=account).delete()
