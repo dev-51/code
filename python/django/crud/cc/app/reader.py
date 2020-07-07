@@ -45,11 +45,21 @@ def getData(cuit, account_type, rest_api = False):
 
     try:
         account = Account.objects.get(cuit=cuit)
-    except (MultipleObjectsReturned) as e:
+    except MultipleObjectsReturned:
         data = {
             "error":
                 "Lo siento, pero existe más de un registro " + \
                 "con el mismo número de cuit {}."
+        }
+        data["error"] = data["error"].format(cuit)
+
+        if rest_api:
+            data["error"] = data["error"].decode("utf8")
+    except ObjectDoesNotExist:
+        data = {
+            "error":
+                "Lo siento, pero el registro con el número " + \
+                "de cuit {} no existe o ha sido borrado."
         }
         data["error"] = data["error"].format(cuit)
 
@@ -64,7 +74,6 @@ def getData(cuit, account_type, rest_api = False):
                 person = Person.objects.get(account=account)
 
             data = {
-                "error": None,
                 "person": person,
                 "account_type": account_type
             }
@@ -75,7 +84,6 @@ def getData(cuit, account_type, rest_api = False):
                 company = Company.objects.get(account=account)
 
             data = {
-                "error": None,
                 "company": company,
                 "account_type": account_type
             }

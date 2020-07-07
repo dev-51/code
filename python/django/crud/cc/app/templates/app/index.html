@@ -1,8 +1,7 @@
 {% if all_accounts %}
     <h3>Listado de titulares de cuentas corrientes</h3>
     {% if message %}
-        {{ message }}
-        <br><br>
+        <h4>Atención: {{ message }}</h4>
     {% endif %}
     <form method="post" action="/app/">
     <input type="button" onclick="add_person(this)" value="Agregar titular fisico">

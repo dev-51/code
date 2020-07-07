@@ -2,12 +2,12 @@ from .models import Account, Person, Company
 
 def restoreDatabase():
     # --------------------------
-    # Elimino a todos los Titulares
+    # Remove all Accounts
     # --------------------------
     Account.objects.all().delete()
 
     # --------------------------
-    # Titulares Fisicos
+    # Add Person
     # --------------------------
     account=Account(cuit=30710647011, account_type="F")
     account.save()
@@ -25,7 +25,7 @@ def restoreDatabase():
     person.save()
 
     # --------------------------
-    # Titulares Juridicos
+    # Add Company
     # --------------------------
     account=Account(cuit=30117706184, account_type="J")
     account.save()

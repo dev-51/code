@@ -2,23 +2,6 @@
 from .models import Account
 from .database import Database
 
-def createJSON(r):
-    ob = []
-    keys = []
-    data = {}
-
-    if r.method == 'POST':
-        keys = [str(key) for key in r.POST.iterkeys()]
-        ob = r.POST
-    elif r.method == 'GET':
-        keys = [str(key) for key in r.GET.iterkeys()]
-        ob = r.GET
-
-    for key in keys:
-        data[key] = ob[key]
-
-    return data
-
 def commitInsert(params):
     db = Database(params["cuit"], params["account_type"])
 
@@ -57,19 +40,15 @@ def commitRemove(params):
     elif params["account_type"] == "J":
         db.removeCompany()
 
-def execAction(r, rest_api = False):
-    params = createJSON(r)
-
-    if r.method == 'POST':
-        keys = [str(key) for key in r.POST.iterkeys()]
-    elif r.method == 'GET':
-        keys = [str(key) for key in r.GET.iterkeys()]
+def execAction(params, rest_api = False):
+    keys = [str(key) for key in params]
 
     pre_error = None
 
     if "insert" in keys:
         count = Account.objects.filter(cuit=params["cuit"]).count()
-        # if account exists, at least, once or more times, then operation is aborted
+        # if account exists, at least, once or more times,
+        # then operation is aborted
         if count > 0:
             pre_error = \
                 "Ya existe el mismo número de cuit {}. " + \
@@ -80,20 +59,30 @@ def execAction(r, rest_api = False):
             commitInsert(params)
     elif "update" in keys:
         count = Account.objects.filter(cuit=params["cuit"]).count()
-        # if account exists more than once, then operation is aborted
-        if count > 1:
+        # if account does not exist, then operation is aborted
+        if count == 0:
             pre_error = \
-                "Atención: El número de cuit {} existe más de una vez. " + \
+                "El número de cuit {} no existe o ha sido borrado. " + \
+                "La operación de grabar en base de datos, ha sido cancelada."
+            pre_error = pre_error.format(params["cuit"])
+        elif count > 1: # if account exists more than once, then operation is aborted
+            pre_error = \
+                "El número de cuit {} existe más de una vez. " + \
                 "La operación de grabar en base de datos, ha sido cancelada."
             pre_error = pre_error.format(params["cuit"])
         else:
             commitUpdate(params)
     elif "remove" in keys:
         count = Account.objects.filter(cuit=params["cuit"]).count()
-        # if account exists more than once, then operation is aborted
-        if count > 1:
+        # if account does not exist, then operation is aborted
+        if count == 0:
             pre_error = \
-                "Atención: El número de cuit {} existe más de una vez. " + \
+                "El número de cuit {} no existe o ha sido borrado. " + \
+                "La operación de borrar en base de datos, ha sido cancelada."
+            pre_error = pre_error.format(params["cuit"])
+        elif count > 1: # if account exists more than once, then operation is aborted
+            pre_error = \
+                "El número de cuit {} existe más de una vez. " + \
                 "La operación de borrar en base de datos, ha sido cancelada."
             pre_error = pre_error.format(params["cuit"])
         else:

@@ -21,6 +21,10 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^app/', include('app.urls')),
 
+    # -------------------------------------------------
+    # using parameters with question mark
+    # -------------------------------------------------
+
     # restore database
     # /app/api/?restore=do
 
@@ -43,4 +47,42 @@ urlpatterns = [
     # view all
     # /app/api/?list=do
     url(r'^app/api/$', views.CRUD.as_view()),
+
+    # -------------------------------------------------
+    # using parameters inside url path
+    # -------------------------------------------------
+
+    # restore database
+    # /app/rest-rs/run/
+    url(r'^app/rest-rs/(?P<restore>[a-z]+)/$', views.CRUD.as_view()),
+
+    # insert person
+    # /app/rest-ins/run/30710647011/F/Roberto/Ruiz/27066345/
+    url(r'^app/rest-ins/(?P<insert>[a-z]+)/(?P<cuit>[0-9]+)/(?P<account_type>[A-Z]{1})/(?P<name>[a-zA-Z]+)/(?P<surname>[a-zA-Z]+)/(?P<cardid>[0-9]+)/$', views.CRUD.as_view()),
+
+    # insert company
+    # /app/rest-ins/run/30117706184/J/Robotics/1994/
+    url(r'^app/rest-ins/(?P<insert>[a-z]+)/(?P<cuit>[0-9]+)/(?P<account_type>[A-Z]{1})/(?P<name>[a-zA-Z]+)/(?P<year>[0-9]+)/$', views.CRUD.as_view()),
+
+    # update person
+    # /app/rest-upt/run/30710647011/F/Roberto/Ruiz/27066345/
+    url(r'^app/rest-upt/(?P<update>[a-z]+)/(?P<cuit>[0-9]+)/(?P<account_type>[A-Z]{1})/(?P<name>[a-zA-Z]+)/(?P<surname>[a-zA-Z]+)/(?P<cardid>[0-9]+)/$', views.CRUD.as_view()),
+
+    # update company
+    # /app/rest-upt/run/30117706184/J/Robotics/1994/
+    url(r'^app/rest-upt/(?P<update>[a-z]+)/(?P<cuit>[0-9]+)/(?P<account_type>[A-Z]{1})/(?P<name>[a-zA-Z]+)/(?P<year>[0-9]+)/$', views.CRUD.as_view()),
+
+    # remove person, company
+    # /app/rest-rm/run/30710647011/F/
+    # /app/rest-rm/run/30117706184/J/
+    url(r'^app/rest-rm/(?P<remove>[a-z]+)/(?P<cuit>[0-9]+)/(?P<account_type>[A-Z]{1})/$', views.CRUD.as_view()),
+
+    # view person, company
+    # /app/rest-vw/run/30710647011/F/
+    # /app/rest-vw/run/30117706184/J/
+    url(r'^app/rest-vw/(?P<show>[a-z]+)/(?P<cuit>[0-9]+)/(?P<account_type>[A-Z]{1})/$', views.CRUD.as_view()),
+
+    # view all
+    # /app/rest-ls/run/
+    url(r'^app/rest-ls/(?P<list>[a-z]+)/$', views.CRUD.as_view()),
 ]
