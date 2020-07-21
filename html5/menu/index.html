@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Demo</title>
+<link rel="stylesheet" type="text/css" href="styles.css">	
+</head>
+<body>	
+<header>
+	<section>		
+	</section>	
+</header>
+<nav>
+	<ul>
+		<li><a id="mnu_init" href="#">HOME</a></li>
+		<li>
+			<a id="mnu_products" href="#">PRODUCTS</a>
+			<ul id="submnu_products">
+				<li><a href="#">TROUSERS</a></li>
+				<li><a href="#">T-SHIRTS</a></li>
+				<li><a href="#">COATS</a></li>
+				<li><a href="#">SOCKETS</a></li>
+				<li><a href="#">T-SHIRTS</a></li>
+			</ul>
+		</li>
+		<li><a id="mnu_about" href="#">ABOUT</a></li>
+		<li><a id="mnu_shopping" href="#">SHOPPING</a></li>
+	</ul>
+</nav>		
+<main>
+	<aside id="sidebar">	
+	</aside>	
+	<section id="content">
+		<section>
+			<article></article>
+			<article></article>
+			<article></article>
+		</section>
+		<section>
+			<article></article>
+			<article></article>
+			<article></article>
+		</section>	
+	</section>	
+</main>	
+<script>
+	var g_bgColor = '';
+	
+	(function() {   
+		var xobj = new XMLHttpRequest();
+		
+		//xobj.open('GET', 'data.json?'+Math.random(10), true);
+		xobj.open('GET', 'data.php?'+Math.random(10), true);
+		xobj.onreadystatechange = function () {			
+			if (xobj.readyState == 4 && xobj.status == "200") {
+				var data = JSON.parse(xobj.responseText);
+
+				var submnu = document.getElementById("submnu_products");
+				var anchors = submnu.getElementsByTagName("a");
+
+				for (var x = 0; x < anchors.length; x ++){
+					anchors[x].innerHTML = data["submenu"][x]["title"];	
+					anchors[x].href = "." + data["submenu"][x]["url"];
+					anchors[x].target = "_new";
+				}
+				
+			}
+		};
+		
+		xobj.send();  
+	}) (); 
+	
+	document.getElementById("mnu_init").onclick = function(){
+		var ob_content = document.getElementById("content");
+		var ob_articles = ob_content.getElementsByTagName("article");
+
+		for (var x = ob_articles.length - 1; x >= 0; x --)
+		{
+			ob_articles[x].parentElement.removeChild(ob_articles[x]);
+		}
+	};
+	
+	document.getElementById("mnu_about").onclick = function(){
+		var ob_sidebar = document.getElementById("sidebar");
+		var ob_label = document.createElement("label");
+		ob_label.innerHTML = "New Item";
+		ob_sidebar.appendChild(ob_label);
+	};
+	
+	document.getElementById("mnu_shopping").onmouseover = function(){
+		var ob_sidebar = document.getElementById("sidebar");
+		g_bgColor = ob_sidebar.style.backgroundColor;
+		ob_sidebar.style.backgroundColor = '#F37911';
+	};
+
+	document.getElementById("mnu_shopping").onmouseout = function(){
+		var ob_sidebar = document.getElementById("sidebar");
+		ob_sidebar.style.backgroundColor = g_bgColor;		
+	};	
+</script>
+</body>
+</html>
