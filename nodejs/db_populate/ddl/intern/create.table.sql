@@ -1,0 +1,17 @@
+USE shift;
+
+CREATE TABLE intern
+(
+		id INT PRIMARY KEY AUTO_INCREMENT NOT NULL
+,		code VARCHAR(10) NULL
+,		name VARCHAR(100) NOT NULL
+,		surname VARCHAR(100) NOT NULL
+,		email VARCHAR(100) NOT NULL
+,		phone VARCHAR(50) NULL
+,		mobile VARCHAR(50) NULL
+,		username VARCHAR(20) NOT NULL
+,		password VARCHAR(15) NOT NULL
+,		id_usertype INT NOT NULL
+,		active SMALLINT DEFAULT 1 NOT NULL
+,		FOREIGN KEY (id_usertype) REFERENCES usertype(id)
+);

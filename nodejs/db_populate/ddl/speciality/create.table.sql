@@ -1,0 +1,7 @@
+USE shift;
+
+CREATE TABLE speciality
+(
+	id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+	name VARCHAR(150) NOT NULL
+);
