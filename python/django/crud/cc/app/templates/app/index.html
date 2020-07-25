@@ -1,7 +1,7 @@
 {% if all_accounts %}
     <h3>Listado de titulares de cuentas corrientes</h3>
     {% if message %}
-        <h4>Atención: {{ message }}</h4>
+    <h4>Atención: {{ message }}</h4>
     {% endif %}
     <form method="post" action="/app/">
     <input type="button" onclick="add_person(this)" value="Agregar titular fisico">
@@ -23,6 +23,7 @@
         </tr>
         {% endfor %}
     </table>
+    {% csrf_token %}
     </form>
     <script>
         function add_person(sender) {
@@ -50,6 +51,7 @@
     <form method="post" action="/app/">
     <input type="button" onclick="add_person(this)" value="Agregar titular fisico">
     <input type="button" onclick="add_company(this)" value="Agregar titular juridico">
+    {% csrf_token %}
     </form>
     <script>
         function add_person(sender) {

@@ -3,6 +3,7 @@
     {{ data.error }}
 <br><br>
 <input type="submit" name="back" value="Volver">
+{% csrf_token %}
 </form>
 {% else %}
     {% if data.account_type == "F" %}
@@ -30,6 +31,7 @@
 <input type="hidden" name="account_type" value="{{ data.account_type }}">
 <input type="submit" name="remove" value="Borrar permanentemente">
 <input type="submit" name="cancel" value="Cancelar">
+{% csrf_token %}
 </form>
     {% elif data.account_type == "J" %}
 <form method="POST" action="/app/">
@@ -52,6 +54,7 @@
 <input type="hidden" name="account_type" value="{{ data.account_type }}">
 <input type="submit" name="remove" value="Borrar permanentemente">
 <input type="submit" name="cancel" value="Cancelar">
+{% csrf_token %}
 </form>
     {% endif %}
 {% endif %}

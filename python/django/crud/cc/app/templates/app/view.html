@@ -3,6 +3,7 @@
     {{ data.error }}
 <br><br>
 <input type="submit" name="back" value="Volver">
+{% csrf_token %}
 </form>
 {% else %}
     {% if data.account_type == "F" %}
@@ -27,6 +28,7 @@
 </table>
 <br>
 <input type="submit" name="back" value="Volver">
+{% csrf_token %}
 </form>
     {% elif data.account_type == "J" %}
 <form method="POST" action="/app/">
@@ -46,6 +48,7 @@
 </table>
 <br>
 <input type="submit" name="back" value="Volver">
+{% csrf_token %}
 </form>
     {% endif %}
 {% endif %}

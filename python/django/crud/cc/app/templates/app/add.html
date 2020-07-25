@@ -22,6 +22,8 @@
 <input type="hidden" name="account_type" value="{{ account_type }}">
 <input type="submit" name="insert" value="Guardar">
 <input type="submit" name="cancel" value="Cancelar">
+{% csrf_token %}
+</form>
 {% elif account_type == "J" %}
 <form method="POST" action="/app/">
 <table border="1">
@@ -42,5 +44,6 @@
 <input type="hidden" name="account_type" value="{{ account_type }}">
 <input type="submit" name="insert" value="Guardar">
 <input type="submit" name="cancel" value="Cancelar">
+{% csrf_token %}
 </form>
 {% endif %}

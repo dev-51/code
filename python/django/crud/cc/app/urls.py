@@ -14,25 +14,26 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url
-from . import views
+from .views import IndexView, AddView, EditView, \
+                    RemoveView, DisplayView, RestoreView
 
 urlpatterns = [
     # /app/
-    url(r'^$', views.index, name='index'),
+    url(r'^$', IndexView.as_view(), name='index'),
 
     # /app/add/F/ or /app/add/J/
-    url(r'add/(?P<account_type>[A-Z]{1})/$', views.add, name='add'),
+    url(r'add/(?P<account_type>[A-Z]{1})/$', AddView.as_view(), name='add'),
 
     # /app/edit/
-    url(r'edit/(?P<cuit>[0-9]+)/(?P<account_type>[A-Z]{1})/$', views.edit, name='edit'),
+    url(r'edit/(?P<cuit>[0-9]+)/(?P<account_type>[A-Z]{1})/$', EditView.as_view(), name='edit'),
 
     # /app/remove/
-    url(r'remove/(?P<cuit>[0-9]+)/(?P<account_type>[A-Z]{1})/$', views.remove, name='remove'),
+    url(r'remove/(?P<cuit>[0-9]+)/(?P<account_type>[A-Z]{1})/$', RemoveView.as_view(), name='remove'),
 
     # /app/view/
-    url(r'view/(?P<cuit>[0-9]+)/(?P<account_type>[A-Z]{1})/$', views.view, name='view'),
+    url(r'view/(?P<cuit>[0-9]+)/(?P<account_type>[A-Z]{1})/$', DisplayView.as_view(), name='view'),
 
     # /app/restore/database/
-    url(r'restore/database/$', views.restore, name='restore'),
+    url(r'restore/database/$', RestoreView.as_view(), name='restore'),
 ]
 
